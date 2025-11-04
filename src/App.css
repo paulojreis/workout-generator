@@ -1,1 +1,40 @@
 /* App specific styles */
+
+.workout-generator-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: var(--bg-main);
+  padding-top: var(--spacing-12);
+}
+
+.workout-generator-content {
+  width: 600px;
+  padding: var(--spacing-08);
+}
+
+.workout-generator-card {
+  border-color: var(--border-primary);
+  background: var(--bg-card);
+  padding: var(--spacing-08);
+  border-radius: var(--border-radius-large);
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+}
+
+.card-header-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-03);
+}
+
+.card-header-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--bg-btn-primary);
+  flex-shrink: 0;
+}

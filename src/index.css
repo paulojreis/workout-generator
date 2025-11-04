@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Border Radius */
+    --border-radius-none: 0px;
+    --border-radius-base: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 16px;
+    --border-radius-full: 9999px;
+
+    /* Spacing */
+    --spacing-00: 0px;
+    --spacing-01: 2px;
+    --spacing-02: 4px;
+    --spacing-03: 6px;
+    --spacing-04: 8px;
+    --spacing-05: 12px;
+    --spacing-06: 16px;
+    --spacing-07: 20px;
+    --spacing-08: 24px;
+    --spacing-09: 32px;
+    --spacing-10: 40px;
+    --spacing-11: 48px;
+    --spacing-12: 56px;
+    --spacing-13: 64px;
+    --spacing-14: 72px;
+    --spacing-15: 80px;
+    --spacing-16: 96px;
+
+    /* Semantic variables for Workout Generator (light mode) */
+    --bg-main: var(--color-slate-50);
+    --bg-card: var(--color-white);
+    --bg-btn-primary: var(--color-teal-500);
+    --bg-theme-toggler: var(--color-slate-200);
+
+    --border-primary: var(--color-slate-300);
+
+    --content-primary: var(--color-slate-900);
+    --content-secondary: var(--color-slate-500);
+    --content-btn-primary: var(--color-white);
+  }
+
+  .dark {
+    /* Semantic variables for Workout Generator (dark mode) */
+    --bg-main: var(--color-slate-700);
+    --bg-card: var(--color-slate-800);
+    --bg-btn-primary: var(--color-teal-500);
+    --bg-theme-toggler: var(--color-slate-800);
+
+    --border-primary: var(--color-slate-600);
+
+    --content-primary: var(--color-slate-50);
+    --content-secondary: var(--color-slate-400);
+    --content-btn-primary: var(--color-white);
+  }
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+}

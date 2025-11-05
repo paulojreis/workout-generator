@@ -33,6 +33,8 @@
     --bg-card: var(--color-white);
     --bg-btn-primary: var(--color-teal-500);
     --bg-theme-toggler: var(--color-slate-200);
+    --bg-form-elements: var(--color-white);
+    --bg-dropdown-hover: var(--color-slate-50);
 
     --border-primary: var(--color-slate-300);
 
@@ -47,6 +49,8 @@
     --bg-card: var(--color-slate-800);
     --bg-btn-primary: var(--color-teal-500);
     --bg-theme-toggler: var(--color-slate-800);
+    --bg-form-elements: var(--color-slate-800);
+    --bg-dropdown-hover: var(--color-slate-700);
 
     --border-primary: var(--color-slate-600);
 
@@ -59,5 +63,137 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
+    color: var(--content-primary);
+  }
+
+  /* Typography styles from Figma */
+  h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 48px;
+    letter-spacing: -0.576px;
+  }
+
+  h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.225px;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.144px;
+  }
+
+  h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.1px;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  blockquote {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    font-style: italic;
+  }
+
+  ul, ol {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@layer components {
+  .text-lead {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .text-large {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .text-p-ui {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .text-small {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  .text-subtle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-slate-500);
+  }
+
+  .text-subtle-medium {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .text-body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .text-inline-code {
+    font-family: 'Menlo', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    background: var(--color-slate-100);
+    padding: 3px 4px;
+    border-radius: 3px;
+  }
+
+  .text-table-head {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .text-table-item {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
   }
 }

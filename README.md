@@ -1,4 +1,4 @@
-# Paulo testing
+# Workout generator
 
 A React application built with modern web technologies and ShadCN UI components.
 

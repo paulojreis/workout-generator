@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Dumbbell, Check } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import './App.css'
 
 function App() {
@@ -20,6 +20,10 @@ function App() {
   const [selectedEquipment, setSelectedEquipment] = useState<string[]>(['any'])
   const [selectedWorkoutType, setSelectedWorkoutType] = useState<string>('hypertrophy')
   const [selectedDuration, setSelectedDuration] = useState<string>('standard')
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [workoutData, setWorkoutData] = useState<any>(null)
+
+  const resultsRef = useRef<HTMLDivElement>(null)
 
   const splitTypes = ['full-body', 'upper', 'lower', 'push', 'pull', 'legs']
   const muscleGroups = ['chest', 'back', 'shoulders', 'biceps', 'triceps', 'legs-muscle', 'abs', 'calves']
@@ -115,6 +119,69 @@ function App() {
 
     // Multiple selections - show comma-separated list
     return selectedEquipment.map(v => labels[v] || v).join(', ')
+  }
+
+  const handleGenerateWorkout = async () => {
+    setIsGenerating(true)
+
+    try {
+      // Transform form values to API format
+      const splitText = getSplitDisplayValue()
+      const style = selectedWorkoutType.charAt(0).toUpperCase() + selectedWorkoutType.slice(1)
+
+      // Map duration to text format
+      const durationMap: Record<string, string> = {
+        'express': '<45 minutes',
+        'standard': '45-60 minutes',
+        'long': '60-90 minutes',
+        'extended': '90-120 minutes'
+      }
+      const durationText = durationMap[selectedDuration] || '45-60 minutes'
+
+      // Transform equipment (filter out 'any')
+      const equipmentToUse = selectedEquipment.includes('any')
+        ? ['any']
+        : selectedEquipment.map(eq => eq.replace('-', '_'))
+
+      const requestBody = {
+        splitText,
+        style,
+        durationText,
+        equipmentToUse
+      }
+
+      console.log('Request body:', requestBody)
+
+      // Call Supabase edge function
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/gemini-chat`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
+          },
+          body: JSON.stringify(requestBody)
+        }
+      )
+
+      const data = await response.json()
+      console.log('Workout response:', data)
+
+      if (data.success && data.data) {
+        setWorkoutData(data.data)
+
+        // Scroll to results after a brief delay
+        setTimeout(() => {
+          resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 100)
+      }
+
+    } catch (error) {
+      console.error('Error generating workout:', error)
+    } finally {
+      setIsGenerating(false)
+    }
   }
 
   return (
@@ -410,11 +477,75 @@ function App() {
             </div>
           </div>
 
-          <button className="generate-button">
+          <button
+            className="generate-button"
+            onClick={handleGenerateWorkout}
+            disabled={isGenerating}
+          >
             <Dumbbell className="h-4 w-4" />
-            <span className="text-large">Generate my workout</span>
+            <span className="text-large">
+              {isGenerating ? 'Generating...' : 'Generate my workout'}
+            </span>
           </button>
         </Card>
+
+        {workoutData && (
+          <div ref={resultsRef} className="workout-results">
+            <Card className="workout-card">
+              <div className="workout-header">
+                <h3 className="workout-name">{workoutData.workoutName}</h3>
+                <p className="text-body workout-time">
+                  Estimated time: {workoutData.totalEstimatedTime}
+                </p>
+              </div>
+
+              <div className="exercises-list">
+                {workoutData.exercises?.map((exercise: any, index: number) => (
+                  <div key={exercise.exerciseId || index}>
+                    {index > 0 && <div className="exercise-divider" />}
+                    <div className="exercise-item">
+                      <h4 className="exercise-name">{exercise.exerciseName}</h4>
+
+                      <div className="exercise-details">
+                        <div className="exercise-specs">
+                          <div className="spec-row">
+                            <span className="text-body spec-label">Sets</span>
+                            <span className="text-body">{exercise.sets}</span>
+                          </div>
+                          <div className="spec-row">
+                            <span className="text-body spec-label">Repetitions</span>
+                            <span className="text-body">{exercise.reps}</span>
+                          </div>
+                          <div className="spec-row">
+                            <span className="text-body spec-label">Rest</span>
+                            <span className="text-body">{exercise.restPeriod}</span>
+                          </div>
+                        </div>
+
+                        <div className="exercise-targets">
+                          <div className="target-row">
+                            <span className="text-body target-label">Primary target</span>
+                            <span className="text-body">{exercise.primaryTarget}</span>
+                          </div>
+                          {exercise.secondaryTarget && (
+                            <div className="target-row">
+                              <span className="text-body target-label">Secondary target</span>
+                              <span className="text-body">{exercise.secondaryTarget}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {exercise.description && (
+                        <p className="text-body exercise-description">{exercise.description}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   )

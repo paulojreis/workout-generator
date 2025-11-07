@@ -45,7 +45,11 @@ INSTRUCTIONS:
 3. Structure the workout appropriately for the split type and duration
 4. Include sets and reps appropriate for the training style
 5. Order exercises optimally (typically compound movements first, then isolation)
-6. Include rest periods between sets
+6. Include rest periods between sets with abbreviated units:
+   - Use "sec" for seconds (e.g., "30 sec", "45 sec")
+   - Use "min" for minutes (e.g., "1 min", "2 min")
+   - Convert seconds to minutes when appropriate (60 seconds = 1 min, 90 seconds = 1.5 min, 120 seconds = 2 min)
+   - Use the most concise format (prefer "2 min" over "120 sec")
 7. For each exercise, include primary and secondary muscle targets using HUMAN-READABLE names:
    - Use proper capitalization (e.g., "Front delts", "Middle delts", "Triceps")
    - Use spaces instead of underscores (e.g., "Front delts" NOT "front_delts")

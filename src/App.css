@@ -320,12 +320,32 @@
   line-height: 1.6;
 }
 
-.condensed-placeholder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: var(--spacing-11);
-  color: var(--content-secondary);
+.condensed-table-container {
+  width: 100%;
+}
+
+.condensed-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.condensed-table thead tr {
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.condensed-table th {
+  text-align: left;
+  padding: var(--spacing-03);
+  vertical-align: top;
+}
+
+.condensed-table td {
+  padding: var(--spacing-03);
+  vertical-align: top;
+}
+
+.condensed-table tbody tr.alt-row {
+  background: var(--bg-table-alt);
 }
 
 /* Tabs styling to match Figma design */

@@ -569,8 +569,27 @@ function App() {
                 </TabsContent>
 
                 <TabsContent value="condensed">
-                  <div className="condensed-placeholder">
-                    <p className="text-large">Condensed WIP</p>
+                  <div className="condensed-table-container">
+                    <table className="condensed-table">
+                      <thead>
+                        <tr>
+                          <th className="text-table-head">Exercise</th>
+                          <th className="text-table-head">Sets</th>
+                          <th className="text-table-head">Reps</th>
+                          <th className="text-table-head">Rest</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {workoutData.exercises?.map((exercise: any, index: number) => (
+                          <tr key={exercise.exerciseId || index} className={index % 2 === 1 ? 'alt-row' : ''}>
+                            <td className="text-table-item">{exercise.exerciseName}</td>
+                            <td className="text-table-item">{exercise.sets}</td>
+                            <td className="text-table-item">{exercise.reps}</td>
+                            <td className="text-table-item">{exercise.restPeriod}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </TabsContent>
               </Tabs>

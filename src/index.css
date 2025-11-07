@@ -35,6 +35,7 @@
     --bg-theme-toggler: var(--color-slate-200);
     --bg-form-elements: var(--color-white);
     --bg-dropdown-hover: var(--color-slate-50);
+    --bg-table-alt: var(--color-slate-50);
 
     --border-primary: var(--color-slate-300);
 
@@ -51,6 +52,7 @@
     --bg-theme-toggler: var(--color-slate-800);
     --bg-form-elements: var(--color-slate-800);
     --bg-dropdown-hover: var(--color-slate-700);
+    --bg-table-alt: var(--color-slate-700);
 
     --border-primary: var(--color-slate-600);
 

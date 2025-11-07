@@ -10,8 +10,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Dumbbell, Check } from 'lucide-react'
-import { useState, useRef } from 'react'
+import { Dumbbell, Check, Moon, Sun } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -24,8 +24,17 @@ function App() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [workoutData, setWorkoutData] = useState<any>(null)
   const [activeView, setActiveView] = useState<string>('detailed')
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   const resultsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [isDarkMode])
 
   const splitTypes = ['full-body', 'upper', 'lower', 'push', 'pull', 'legs']
   const muscleGroups = ['chest', 'back', 'shoulders', 'biceps', 'triceps', 'legs-muscle', 'abs', 'calves']
@@ -195,6 +204,13 @@ function App() {
 
   return (
     <div className="workout-generator-container">
+      <button
+        className="theme-toggle"
+        onClick={() => setIsDarkMode(!isDarkMode)}
+        aria-label="Toggle theme"
+      >
+        {isDarkMode ? <Sun className="theme-icon" /> : <Moon className="theme-icon" />}
+      </button>
       <div className="workout-generator-content">
         <Card className="workout-generator-card">
           <div className="card-header">
@@ -533,27 +549,27 @@ function App() {
                             <div className="exercise-specs">
                               <div className="spec-row">
                                 <span className="text-subtle spec-label">Sets</span>
-                                <span className="text-small spec-value">{exercise.sets}</span>
+                                <span className="text-subtle-medium spec-value">{exercise.sets}</span>
                               </div>
                               <div className="spec-row">
                                 <span className="text-subtle spec-label">Repetitions</span>
-                                <span className="text-small spec-value">{exercise.reps}</span>
+                                <span className="text-subtle-medium spec-value">{exercise.reps}</span>
                               </div>
                               <div className="spec-row">
                                 <span className="text-subtle spec-label">Rest</span>
-                                <span className="text-small spec-value">{exercise.restPeriod}</span>
+                                <span className="text-subtle-medium spec-value">{exercise.restPeriod}</span>
                               </div>
                             </div>
 
                             <div className="exercise-targets">
                               <div className="target-row">
                                 <span className="text-subtle target-label">Primary target</span>
-                                <span className="text-small target-value">{exercise.primaryTarget}</span>
+                                <span className="text-subtle-medium target-value">{exercise.primaryTarget}</span>
                               </div>
                               {exercise.secondaryTarget && (
                                 <div className="target-row">
                                   <span className="text-subtle target-label">Secondary target</span>
-                                  <span className="text-small target-value">{exercise.secondaryTarget}</span>
+                                  <span className="text-subtle-medium target-value">{exercise.secondaryTarget}</span>
                                 </div>
                               )}
                             </div>

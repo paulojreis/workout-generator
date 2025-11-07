@@ -6,6 +6,34 @@
   justify-content: center;
   background: var(--bg-main);
   padding-top: var(--spacing-12);
+  position: relative;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: var(--spacing-08);
+  right: var(--spacing-08);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-theme-toggler);
+  border: none;
+  border-radius: var(--border-radius-full);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  z-index: 100;
+}
+
+.theme-toggle:hover {
+  opacity: 0.8;
+}
+
+.theme-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--content-primary);
 }
 
 .workout-generator-content {

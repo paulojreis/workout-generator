@@ -66,6 +66,7 @@
   body {
     font-family: 'Inter', sans-serif;
     color: var(--content-primary);
+    background: var(--bg-main);
   }
 
   /* Typography styles from Figma */

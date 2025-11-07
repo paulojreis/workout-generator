@@ -46,7 +46,11 @@ INSTRUCTIONS:
 4. Include sets and reps appropriate for the training style
 5. Order exercises optimally (typically compound movements first, then isolation)
 6. Include rest periods between sets
-7. For each exercise, include primary and secondary muscle targets from the database
+7. For each exercise, include primary and secondary muscle targets using HUMAN-READABLE names:
+   - Use proper capitalization (e.g., "Front delts", "Middle delts", "Triceps")
+   - Use spaces instead of underscores (e.g., "Front delts" NOT "front_delts")
+   - When listing multiple muscles, separate with commas (e.g., "Front delts, Middle delts")
+   - Format muscle names as they would appear in a fitness app UI
 8. Generate a complete structured workout based on these parameters`;
 }
 

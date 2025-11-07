@@ -52,11 +52,11 @@ const RESPONSE_SCHEMA: ChatResponseSchema = {
           },
           primaryTarget: {
             type: "string",
-            description: "Primary muscle targets (comma-separated)",
+            description: "Primary muscle targets in human-readable format with proper capitalization (e.g., 'Front delts, Middle delts')",
           },
           secondaryTarget: {
             type: "string",
-            description: "Secondary muscle targets (comma-separated)",
+            description: "Secondary muscle targets in human-readable format with proper capitalization (e.g., 'Triceps')",
           },
           description: {
             type: "string",

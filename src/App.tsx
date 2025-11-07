@@ -171,9 +171,16 @@ function App() {
       if (data.success && data.data) {
         setWorkoutData(data.data)
 
-        // Scroll to results after a brief delay
+        // Scroll to results after a brief delay with 20px offset from top
         setTimeout(() => {
-          resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          if (resultsRef.current) {
+            const elementPosition = resultsRef.current.getBoundingClientRect().top
+            const offsetPosition = elementPosition + window.pageYOffset - 20
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            })
+          }
         }, 100)
       }
 
@@ -493,8 +500,8 @@ function App() {
           <div ref={resultsRef} className="workout-results">
             <Card className="workout-card">
               <div className="workout-header">
-                <h3 className="workout-name">{workoutData.workoutName}</h3>
-                <p className="text-body workout-time">
+                <h2 className="workout-name">{workoutData.workoutName}</h2>
+                <p className="text-p-ui workout-time">
                   Estimated time: {workoutData.totalEstimatedTime}
                 </p>
               </div>
@@ -504,33 +511,37 @@ function App() {
                   <div key={exercise.exerciseId || index}>
                     {index > 0 && <div className="exercise-divider" />}
                     <div className="exercise-item">
-                      <h4 className="exercise-name">{exercise.exerciseName}</h4>
+                      <ol className="exercise-name-list">
+                        <li>
+                          <h4 className="exercise-name">{exercise.exerciseName}</h4>
+                        </li>
+                      </ol>
 
                       <div className="exercise-details">
                         <div className="exercise-specs">
                           <div className="spec-row">
-                            <span className="text-body spec-label">Sets</span>
-                            <span className="text-body">{exercise.sets}</span>
+                            <span className="text-subtle spec-label">Sets</span>
+                            <span className="text-subtle spec-value">{exercise.sets}</span>
                           </div>
                           <div className="spec-row">
-                            <span className="text-body spec-label">Repetitions</span>
-                            <span className="text-body">{exercise.reps}</span>
+                            <span className="text-subtle spec-label">Repetitions</span>
+                            <span className="text-subtle spec-value">{exercise.reps}</span>
                           </div>
                           <div className="spec-row">
-                            <span className="text-body spec-label">Rest</span>
-                            <span className="text-body">{exercise.restPeriod}</span>
+                            <span className="text-subtle spec-label">Rest</span>
+                            <span className="text-subtle spec-value">{exercise.restPeriod}</span>
                           </div>
                         </div>
 
                         <div className="exercise-targets">
                           <div className="target-row">
-                            <span className="text-body target-label">Primary target</span>
-                            <span className="text-body">{exercise.primaryTarget}</span>
+                            <span className="text-subtle target-label">Primary target</span>
+                            <span className="text-subtle target-value">{exercise.primaryTarget}</span>
                           </div>
                           {exercise.secondaryTarget && (
                             <div className="target-row">
-                              <span className="text-body target-label">Secondary target</span>
-                              <span className="text-body">{exercise.secondaryTarget}</span>
+                              <span className="text-subtle target-label">Secondary target</span>
+                              <span className="text-subtle target-value">{exercise.secondaryTarget}</span>
                             </div>
                           )}
                         </div>

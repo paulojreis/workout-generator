@@ -200,6 +200,7 @@
 /* Workout Results Section */
 .workout-results {
   margin-top: var(--spacing-08);
+  margin-bottom: var(--spacing-11);
 }
 
 .workout-card {
@@ -226,6 +227,7 @@
 .exercises-list {
   display: flex;
   flex-direction: column;
+  counter-reset: exercise-counter;
 }
 
 .exercise-divider {
@@ -238,13 +240,23 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-05);
+  counter-increment: exercise-counter;
+}
+
+.exercise-name-list {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .exercise-name {
-  margin: 0 0 var(--spacing-05) 0;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 28px;
+  margin: 0;
+}
+
+.exercise-name::before {
+  content: counter(exercise-counter) ". ";
 }
 
 .exercise-details {
@@ -253,7 +265,7 @@
 }
 
 .exercise-specs {
-  flex: 0 0 30%;
+  flex: 0 0 35%;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-03);
@@ -268,7 +280,10 @@
 
 .spec-label {
   color: var(--content-secondary);
-  font-weight: 600;
+}
+
+.spec-value {
+  text-align: right;
 }
 
 .exercise-targets {
@@ -287,7 +302,10 @@
 
 .target-label {
   color: var(--content-secondary);
-  font-weight: 600;
+}
+
+.target-value {
+  text-align: right;
 }
 
 .exercise-description {

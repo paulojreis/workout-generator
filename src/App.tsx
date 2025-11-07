@@ -533,27 +533,27 @@ function App() {
                             <div className="exercise-specs">
                               <div className="spec-row">
                                 <span className="text-subtle spec-label">Sets</span>
-                                <span className="text-subtle spec-value">{exercise.sets}</span>
+                                <span className="text-small spec-value">{exercise.sets}</span>
                               </div>
                               <div className="spec-row">
                                 <span className="text-subtle spec-label">Repetitions</span>
-                                <span className="text-subtle spec-value">{exercise.reps}</span>
+                                <span className="text-small spec-value">{exercise.reps}</span>
                               </div>
                               <div className="spec-row">
                                 <span className="text-subtle spec-label">Rest</span>
-                                <span className="text-subtle spec-value">{exercise.restPeriod}</span>
+                                <span className="text-small spec-value">{exercise.restPeriod}</span>
                               </div>
                             </div>
 
                             <div className="exercise-targets">
                               <div className="target-row">
                                 <span className="text-subtle target-label">Primary target</span>
-                                <span className="text-subtle target-value">{exercise.primaryTarget}</span>
+                                <span className="text-small target-value">{exercise.primaryTarget}</span>
                               </div>
                               {exercise.secondaryTarget && (
                                 <div className="target-row">
                                   <span className="text-subtle target-label">Secondary target</span>
-                                  <span className="text-subtle target-value">{exercise.secondaryTarget}</span>
+                                  <span className="text-small target-value">{exercise.secondaryTarget}</span>
                                 </div>
                               )}
                             </div>

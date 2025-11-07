@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Dumbbell, Check } from 'lucide-react'
 import { useState, useRef } from 'react'
 import './App.css'
@@ -22,6 +23,7 @@ function App() {
   const [selectedDuration, setSelectedDuration] = useState<string>('standard')
   const [isGenerating, setIsGenerating] = useState(false)
   const [workoutData, setWorkoutData] = useState<any>(null)
+  const [activeView, setActiveView] = useState<string>('detailed')
 
   const resultsRef = useRef<HTMLDivElement>(null)
 
@@ -499,61 +501,79 @@ function App() {
         {workoutData && (
           <div ref={resultsRef} className="workout-results">
             <Card className="workout-card">
-              <div className="workout-header">
-                <h2 className="workout-name">{workoutData.workoutName}</h2>
-                <p className="text-p-ui workout-time">
-                  Estimated time: {workoutData.totalEstimatedTime}
-                </p>
-              </div>
+              <Tabs value={activeView} onValueChange={setActiveView}>
+                <div className="workout-header">
+                  <div className="workout-header-content">
+                    <div>
+                      <h2 className="workout-name">{workoutData.workoutName}</h2>
+                      <p className="text-p-ui workout-time">
+                        Estimated time: {workoutData.totalEstimatedTime}
+                      </p>
+                    </div>
+                    <TabsList>
+                      <TabsTrigger value="detailed">Detailed</TabsTrigger>
+                      <TabsTrigger value="condensed">Condensed</TabsTrigger>
+                    </TabsList>
+                  </div>
+                </div>
 
-              <div className="exercises-list">
-                {workoutData.exercises?.map((exercise: any, index: number) => (
-                  <div key={exercise.exerciseId || index}>
-                    {index > 0 && <div className="exercise-divider" />}
-                    <div className="exercise-item">
-                      <ol className="exercise-name-list">
-                        <li>
-                          <h4 className="exercise-name">{exercise.exerciseName}</h4>
-                        </li>
-                      </ol>
+                <TabsContent value="detailed">
+                  <div className="exercises-list">
+                    {workoutData.exercises?.map((exercise: any, index: number) => (
+                      <div key={exercise.exerciseId || index}>
+                        {index > 0 && <div className="exercise-divider" />}
+                        <div className="exercise-item">
+                          <ol className="exercise-name-list">
+                            <li>
+                              <h4 className="exercise-name">{exercise.exerciseName}</h4>
+                            </li>
+                          </ol>
 
-                      <div className="exercise-details">
-                        <div className="exercise-specs">
-                          <div className="spec-row">
-                            <span className="text-subtle spec-label">Sets</span>
-                            <span className="text-subtle spec-value">{exercise.sets}</span>
-                          </div>
-                          <div className="spec-row">
-                            <span className="text-subtle spec-label">Repetitions</span>
-                            <span className="text-subtle spec-value">{exercise.reps}</span>
-                          </div>
-                          <div className="spec-row">
-                            <span className="text-subtle spec-label">Rest</span>
-                            <span className="text-subtle spec-value">{exercise.restPeriod}</span>
-                          </div>
-                        </div>
-
-                        <div className="exercise-targets">
-                          <div className="target-row">
-                            <span className="text-subtle target-label">Primary target</span>
-                            <span className="text-subtle target-value">{exercise.primaryTarget}</span>
-                          </div>
-                          {exercise.secondaryTarget && (
-                            <div className="target-row">
-                              <span className="text-subtle target-label">Secondary target</span>
-                              <span className="text-subtle target-value">{exercise.secondaryTarget}</span>
+                          <div className="exercise-details">
+                            <div className="exercise-specs">
+                              <div className="spec-row">
+                                <span className="text-subtle spec-label">Sets</span>
+                                <span className="text-subtle spec-value">{exercise.sets}</span>
+                              </div>
+                              <div className="spec-row">
+                                <span className="text-subtle spec-label">Repetitions</span>
+                                <span className="text-subtle spec-value">{exercise.reps}</span>
+                              </div>
+                              <div className="spec-row">
+                                <span className="text-subtle spec-label">Rest</span>
+                                <span className="text-subtle spec-value">{exercise.restPeriod}</span>
+                              </div>
                             </div>
+
+                            <div className="exercise-targets">
+                              <div className="target-row">
+                                <span className="text-subtle target-label">Primary target</span>
+                                <span className="text-subtle target-value">{exercise.primaryTarget}</span>
+                              </div>
+                              {exercise.secondaryTarget && (
+                                <div className="target-row">
+                                  <span className="text-subtle target-label">Secondary target</span>
+                                  <span className="text-subtle target-value">{exercise.secondaryTarget}</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {exercise.description && (
+                            <p className="text-body exercise-description">{exercise.description}</p>
                           )}
                         </div>
                       </div>
-
-                      {exercise.description && (
-                        <p className="text-body exercise-description">{exercise.description}</p>
-                      )}
-                    </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </TabsContent>
+
+                <TabsContent value="condensed">
+                  <div className="condensed-placeholder">
+                    <p className="text-large">Condensed WIP</p>
+                  </div>
+                </TabsContent>
+              </Tabs>
             </Card>
           </div>
         )}

@@ -215,6 +215,13 @@
   margin-bottom: var(--spacing-08);
 }
 
+.workout-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-05);
+}
+
 .workout-name {
   margin: 0 0 var(--spacing-03) 0;
 }
@@ -311,6 +318,41 @@
 .exercise-description {
   margin: 0;
   line-height: 1.6;
+}
+
+.condensed-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-11);
+  color: var(--content-secondary);
+}
+
+/* Tabs styling to match Figma design */
+.workout-header [role="tablist"] {
+  background: transparent;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-medium);
+  padding: var(--spacing-02);
+  height: auto;
+}
+
+.workout-header [role="tab"] {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  padding: var(--spacing-03) var(--spacing-05);
+  color: var(--content-primary);
+  border-radius: var(--border-radius-base);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.workout-header [role="tab"][data-state="active"] {
+  background: var(--bg-btn-primary);
+  color: var(--content-btn-primary);
+  border: 1px solid var(--bg-btn-primary);
 }
 
 .select-content[data-state="open"] {

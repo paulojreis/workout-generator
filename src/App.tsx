@@ -37,7 +37,7 @@ function App() {
   }, [isDarkMode])
 
   const splitTypes = ['full-body', 'upper', 'lower', 'push', 'pull', 'legs']
-  const muscleGroups = ['chest', 'back', 'shoulders', 'biceps', 'triceps', 'legs-muscle', 'abs', 'calves']
+  const muscleGroups = ['chest', 'back', 'shoulders', 'biceps', 'triceps', 'quads', 'hamstrings', 'glutes', 'abs', 'calves']
 
   const handleItemClick = (value: string, e: React.MouseEvent) => {
     e.preventDefault()
@@ -94,7 +94,9 @@ function App() {
       'shoulders': 'Shoulders',
       'biceps': 'Biceps',
       'triceps': 'Triceps',
-      'legs-muscle': 'Legs',
+      'quads': 'Quadriceps',
+      'hamstrings': 'Hamstrings',
+      'glutes': 'Glutes',
       'abs': 'Abs',
       'calves': 'Calves',
     }
@@ -327,11 +329,25 @@ function App() {
                         Triceps
                       </span>
                     </div>
-                    <div onMouseDown={(e) => handleItemClick('legs-muscle', e)} className="select-item">
+                    <div onMouseDown={(e) => handleItemClick('quads', e)} className="select-item">
                       <span className="flex items-center gap-2">
-                        {selectedSplit.includes('legs-muscle') && <Check className="h-4 w-4" />}
-                        {!selectedSplit.includes('legs-muscle') && <span className="w-4" />}
-                        Legs
+                        {selectedSplit.includes('quads') && <Check className="h-4 w-4" />}
+                        {!selectedSplit.includes('quads') && <span className="w-4" />}
+                        Quadriceps
+                      </span>
+                    </div>
+                    <div onMouseDown={(e) => handleItemClick('hamstrings', e)} className="select-item">
+                      <span className="flex items-center gap-2">
+                        {selectedSplit.includes('hamstrings') && <Check className="h-4 w-4" />}
+                        {!selectedSplit.includes('hamstrings') && <span className="w-4" />}
+                        Hamstrings
+                      </span>
+                    </div>
+                    <div onMouseDown={(e) => handleItemClick('glutes', e)} className="select-item">
+                      <span className="flex items-center gap-2">
+                        {selectedSplit.includes('glutes') && <Check className="h-4 w-4" />}
+                        {!selectedSplit.includes('glutes') && <span className="w-4" />}
+                        Glutes
                       </span>
                     </div>
                     <div onMouseDown={(e) => handleItemClick('abs', e)} className="select-item">

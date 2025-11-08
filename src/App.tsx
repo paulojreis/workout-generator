@@ -38,7 +38,6 @@ function App() {
 
   const splitTypes = ['full-body', 'upper', 'lower', 'push', 'pull', 'legs']
   const muscleGroups = ['chest', 'back', 'shoulders', 'biceps', 'triceps', 'legs-muscle', 'abs', 'calves']
-  const equipmentTypes = ['barbell', 'dumbbells', 'machines', 'cable-machine', 'bodyweight', 'bench', 'pullup-bar', 'dip-bars', 'resistance-bands']
 
   const handleItemClick = (value: string, e: React.MouseEvent) => {
     e.preventDefault()
@@ -239,7 +238,7 @@ function App() {
           <div className="workout-form">
             <div className="form-row">
               <span className="text-large form-label">I want a</span>
-              <Select open={splitOpen} onOpenChange={setSplitOpen} modal={false}>
+              <Select open={splitOpen} onOpenChange={setSplitOpen}>
                 <SelectTrigger className="form-select">
                   <span>{getSplitDisplayValue()}</span>
                 </SelectTrigger>
@@ -428,7 +427,7 @@ function App() {
 
             <div className="form-row">
               <span className="text-large form-label">using</span>
-              <Select open={equipmentOpen} onOpenChange={setEquipmentOpen} modal={false}>
+              <Select open={equipmentOpen} onOpenChange={setEquipmentOpen}>
                 <SelectTrigger className="form-select">
                   <span>{getEquipmentDisplayValue()}</span>
                 </SelectTrigger>

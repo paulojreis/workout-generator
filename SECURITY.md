@@ -100,7 +100,7 @@ If you add database operations:
 If any key is exposed (committed to git, shared publicly, etc.):
 
 ### **Anon Key (Public)**
-- Dashboard: https://supabase.com/dashboard/project/yxmhsbpvlpvksoteigfj/settings/api
+- Dashboard: Supabase Dashboard → Your Project → Settings → API
 - Click "Reset" next to anon/public key
 - Update in your local environment: `export SUPABASE_ANON_KEY='new_key'`
 - Low urgency (it's meant to be public, but rotation prevents abuse)

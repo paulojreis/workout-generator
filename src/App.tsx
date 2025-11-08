@@ -24,7 +24,10 @@ function App() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [workoutData, setWorkoutData] = useState<any>(null)
   const [activeView, setActiveView] = useState<string>('detailed')
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Initialize based on system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+  })
 
   const resultsRef = useRef<HTMLDivElement>(null)
 
@@ -35,6 +38,21 @@ function App() {
       document.documentElement.classList.remove('dark')
     }
   }, [isDarkMode])
+
+  // Listen for system theme changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsDarkMode(e.matches)
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange)
+    }
+  }, [])
 
   const splitTypes = ['full-body', 'upper', 'lower', 'push', 'pull', 'legs']
   const muscleGroups = ['chest', 'back', 'shoulders', 'biceps', 'triceps', 'quads', 'hamstrings', 'glutes', 'abs', 'calves']

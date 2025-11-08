@@ -47,7 +47,7 @@ npm run preview
 ## Project Structure
 
 ```
-paulo-testing/
+workout-generator/
 ├── src/
 │   ├── components/
 │   │   └── ui/          # ShadCN UI components

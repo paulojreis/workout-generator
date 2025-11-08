@@ -242,6 +242,45 @@ Deno.serve(async (req) => {
     // Parse the JSON response
     const structuredData = JSON.parse(responseText);
 
+    // Validate equipment constraints if not "any"
+    if (!equipmentToUse.includes('any')) {
+      // Import and parse the exercise database
+      const { EXERCISE_DATABASE_JSON } = await import('./exercise-database-data.ts');
+      const exerciseDb = JSON.parse(EXERCISE_DATABASE_JSON);
+
+      // Create a map of exercise ID to equipment requirements
+      const exerciseEquipmentMap = new Map();
+      for (const category in exerciseDb.exercises) {
+        for (const exercise of exerciseDb.exercises[category]) {
+          exerciseEquipmentMap.set(exercise.id, exercise.equipment);
+        }
+      }
+
+      // Filter exercises to only those that match equipment constraints
+      const validExercises = structuredData.exercises.filter((exercise: any) => {
+        const requiredEquipment = exerciseEquipmentMap.get(exercise.exerciseId);
+        if (!requiredEquipment) {
+          console.warn(`Exercise ${exercise.exerciseId} not found in database`);
+          return false;
+        }
+
+        // Check if ALL required equipment is available
+        const allEquipmentAvailable = requiredEquipment.every((req: string) =>
+          equipmentToUse.includes(req)
+        );
+
+        if (!allEquipmentAvailable) {
+          console.log(`Filtered out ${exercise.exerciseName} (${exercise.exerciseId}) - requires ${requiredEquipment.join(', ')}`);
+        }
+
+        return allEquipmentAvailable;
+      });
+
+      const originalCount = structuredData.exercises?.length || 0;
+      structuredData.exercises = validExercises;
+      console.log(`Filtered exercises: ${validExercises.length}/${originalCount} passed equipment check`);
+    }
+
     // Build success response
     const response: ChatResponse = {
       success: true,

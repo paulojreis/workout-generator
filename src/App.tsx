@@ -150,9 +150,22 @@ function App() {
       const durationText = durationMap[selectedDuration] || '45-60 minutes'
 
       // Transform equipment (filter out 'any')
-      const equipmentToUse = selectedEquipment.includes('any')
+      let equipmentToUse = selectedEquipment.includes('any')
         ? ['any']
-        : selectedEquipment.map(eq => eq.replace('-', '_'))
+        : selectedEquipment.map(eq => {
+            // Special case: resistance-bands -> resistance_band (singular in DB)
+            if (eq === 'resistance-bands') return 'resistance_band'
+            return eq.replace('-', '_')
+          })
+
+      // If not 'any', expand related equipment types
+      if (!selectedEquipment.includes('any')) {
+        // If bench is selected, also include incline_bench and decline_bench
+        // (most adjustable benches support these variations)
+        if (equipmentToUse.includes('bench')) {
+          equipmentToUse = [...new Set([...equipmentToUse, 'incline_bench', 'decline_bench'])]
+        }
+      }
 
       const requestBody = {
         splitText,

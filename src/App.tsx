@@ -239,7 +239,7 @@ function App() {
 
           <div className="workout-form">
             <div className="form-row">
-              <span className="text-large form-label">I want a</span>
+              <span className="form-label-text">I want a</span>
               <Select open={splitOpen} onOpenChange={setSplitOpen}>
                 <SelectTrigger className="form-select">
                   <span>{getSplitDisplayValue()}</span>
@@ -367,11 +367,11 @@ function App() {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <span className="text-large form-label">workout</span>
+              <span className="form-label-text">workout</span>
             </div>
 
             <div className="form-row">
-              <span className="text-large form-label">for</span>
+              <span className="form-label-text">for</span>
               <Select value={selectedWorkoutType} onValueChange={setSelectedWorkoutType}>
                 <SelectTrigger className="form-select">
                   <SelectValue />
@@ -403,7 +403,7 @@ function App() {
             </div>
 
             <div className="form-row">
-              <span className="text-large form-label">lasting for</span>
+              <span className="form-label-text">lasting for</span>
               <Select value={selectedDuration} onValueChange={setSelectedDuration}>
                 <SelectTrigger className="form-select">
                   <SelectValue />
@@ -442,7 +442,7 @@ function App() {
             </div>
 
             <div className="form-row">
-              <span className="text-large form-label">using</span>
+              <span className="form-label-text">using</span>
               <Select open={equipmentOpen} onOpenChange={setEquipmentOpen}>
                 <SelectTrigger className="form-select">
                   <span>{getEquipmentDisplayValue()}</span>
